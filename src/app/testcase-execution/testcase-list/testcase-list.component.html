@@ -1,0 +1,8 @@
+<div>
+  <ng-container *ngFor="let testcase of TestCases$ | async">
+    <app-testcase-list-item
+      [case]="testcase"
+      (select)="selectTest($event)"
+    ></app-testcase-list-item>
+  </ng-container>
+</div>
