@@ -9,8 +9,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NavigationModule } from './navigation/navigation.module';
 import { RouterModule, Routes } from '@angular/router';
+import { NavigationPageComponent } from './navigation/navigation-page/navigation-page.component';
 
-const ROUTES: Routes = [{ path: '', redirectTo: 'run', pathMatch: 'full' }];
+const ROUTES: Routes = [
+  { path: '', redirectTo: 'run', pathMatch: 'full' },
+  // { path: '', component: NavigationPageComponent },
+  // { path: '**', component: NavigationPageComponent },
+];
 
 @NgModule({
   imports: [
@@ -20,9 +25,11 @@ const ROUTES: Routes = [{ path: '', redirectTo: 'run', pathMatch: 'full' }];
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+
     RouterModule.forRoot(ROUTES),
     NavigationModule,
   ],
+  exports: [RouterModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
 })

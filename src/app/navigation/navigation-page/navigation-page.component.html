@@ -1,10 +1,13 @@
 <ul>
-  <li [routerLinkActive]="['is-active', 'is-current']">
-    <a routerLink="/run">Run</a>
+  <li>
+    <a routerLink="run" routerLinkActive="active">Run</a>
   </li>
-  <li><a>Settings</a></li>
-  <li style="float:right"><a class="active">About</a></li>
+
+  <li style="float:right">
+    <a routerLink="run" routerLinkActive="active">About</a>
+  </li>
 </ul>
 <section>
+  Outlet
   <router-outlet></router-outlet>
 </section>

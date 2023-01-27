@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { TestcaseModel } from '../models/testcase-model';
 import { CRUDServiceService } from './crudservice.service';
 
@@ -14,7 +14,12 @@ export class BackendAPIService {
   }
 
   testcases() {
-    return this.crud.read<Array<TestcaseModel>>('api/testcases');
+    return of([
+      {
+        id: 'abc',
+      },
+    ]);
+    //return this.crud.read<Array<TestcaseModel>>('api/testcases');
   }
 
   testcase(id: string) {

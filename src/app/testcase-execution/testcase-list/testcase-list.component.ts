@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { combineLatest, map, Observable } from 'rxjs';
 import { TestcaseModel } from 'src/app/models/testcase-model';
 import { DataRepoService } from 'src/app/services/data-repo.service';
@@ -10,27 +10,14 @@ import { UIStateService } from 'src/app/services/uistate.service';
   styleUrls: ['./testcase-list.component.css'],
 })
 export class TestcaseListComponent implements OnInit {
-  private _selectedTestCaseId$!: Observable<string>;
-  private _testCases$!: Observable<Array<TestcaseModel>>;
+  @Input() TestCases!: Array<TestcaseModel> | null;
+  @Output() select = new EventEmitter<string>();
 
-  get TestCases$() {
-    return this._testCases$;
-  }
+  constructor() {}
 
-  get SelectedTestCase() {
-    return combineLatest([this._selectedTestCaseId$, this._testCases$]).pipe(
-      map(([id, cases]) => cases.find((t) => t.id === id))
-    );
-  }
-
-  constructor(private data: DataRepoService, private uistate: UIStateService) {}
-
-  ngOnInit(): void {
-    this._testCases$ = this.data.Testcases$;
-    this._selectedTestCaseId$ = this.uistate.SelectedTestCaseId$;
-  }
+  ngOnInit() {}
 
   selectTest($event: string): void {
-    this.uistate.selectTestCase($event);
+    this.select.next($event);
   }
 }
