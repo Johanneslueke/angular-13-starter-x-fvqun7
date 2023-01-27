@@ -29,7 +29,7 @@ export class BackendAPIService {
     return this.crud.update<TestcaseModel>(`api/testcases/${id}`, change);
   }
 
-  updateAllTestcases(testcases: Array<Partial<TestcaseModel>>) {
+  updateAllTestcases(testcases: Array<TestcaseModel>) {
     return this.crud.update<Array<TestcaseModel>>('api/testcases', testcases);
   }
 }

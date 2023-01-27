@@ -7,11 +7,11 @@ import { TestCaseExcecutionRoutingModule } from './testcase-execution.routing.mo
 
 @NgModule({
   declarations: [
+    TestcasePageComponent,
     TestcaseListComponent,
     TestcaseListItemComponent,
-    TestcasePageComponent,
   ],
   imports: [CommonModule, TestCaseExcecutionRoutingModule],
-  exports: [TestCaseExcecutionRoutingModule],
+  exports: [TestcasePageComponent, TestCaseExcecutionRoutingModule],
 })
 export class TestcaseExecutionModule {}

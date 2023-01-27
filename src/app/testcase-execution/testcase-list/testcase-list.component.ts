@@ -13,17 +13,14 @@ export class TestcaseListComponent implements OnInit {
   private _selectedTestCaseId$!: Observable<string>;
   private _testCases$!: Observable<Array<TestcaseModel>>;
 
-  get TestCase$() {
+  get TestCases$() {
     return this._testCases$;
   }
 
   get SelectedTestCase() {
-    return combineLatest([
-      this._selectedTestCaseId$,
-      this._testCases$
-    ]).pipe(
-      map( ([id, cases]) => cases.find( case => case.id === id))
-    )
+    return combineLatest([this._selectedTestCaseId$, this._testCases$]).pipe(
+      map(([id, cases]) => cases.find((t) => t.id === id))
+    );
   }
 
   constructor(private data: DataRepoService, private uistate: UIStateService) {}

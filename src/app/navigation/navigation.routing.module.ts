@@ -11,7 +11,7 @@ const ROUTES: Routes = [
       {
         path: 'run',
         loadChildren: () =>
-          import('../testcase-execution').then(
+          import('./../testcase-execution/testcase-execution.module').then(
             (m) => m.TestcaseExecutionModule
           ),
       },
