@@ -7,6 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { NavigationModule } from './navigation/navigation.module';
+import { RouterModule, Routes } from '@angular/router';
+
+const ROUTES: Routes = [{ path: '', redirectTo: 'run', pathMatch: 'full' }];
 
 @NgModule({
   imports: [
@@ -16,6 +20,8 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    RouterModule.forRoot(ROUTES),
+    NavigationModule,
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],

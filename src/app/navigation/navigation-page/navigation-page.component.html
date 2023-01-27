@@ -1,1 +1,10 @@
-<p>navigation-page works!</p>
+<ul>
+  <li [routerLinkActive]="['is-active', 'is-current']">
+    <a routerLink="/run">Run</a>
+  </li>
+  <li><a>Settings</a></li>
+  <li style="float:right"><a class="active">About</a></li>
+</ul>
+<section>
+  <router-outlet></router-outlet>
+</section>
