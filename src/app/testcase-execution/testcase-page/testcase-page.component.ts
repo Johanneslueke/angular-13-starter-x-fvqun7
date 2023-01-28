@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { combineLatest, map, Observable } from 'rxjs';
+import { combineLatest, map, Observable, tap } from 'rxjs';
 import { TestcaseModel } from 'src/app/models/testcase-model';
 import { DataRepoService } from 'src/app/services/data-repo.service';
 import { UIStateService } from 'src/app/services/uistate.service';
@@ -13,13 +13,19 @@ export class TestcasePageComponent implements OnInit {
   private _selectedTestCaseId$!: Observable<string>;
   private _testCases$!: Observable<Array<TestcaseModel>>;
 
+  get TemplateViewModel$() {
+    return combineLatest([this._selectedTestCaseId$, this._testCases$]).pipe(
+      map(([id, cases]) => ({ id, cases }))
+    );
+  }
+
   get TestCases$() {
     return this._testCases$;
   }
 
   get SelectedTestCase() {
-    return combineLatest([this._selectedTestCaseId$, this._testCases$]).pipe(
-      map(([id, cases]) => cases.find((t) => t.id === id))
+    return this.TemplateViewModel$.pipe(
+      map(({ id, cases }) => cases.find((t) => t.id === id))
     );
   }
 
@@ -27,10 +33,11 @@ export class TestcasePageComponent implements OnInit {
 
   ngOnInit(): void {
     this._testCases$ = this.data.Testcases$;
-    this._selectedTestCaseId$ = this.uistate.SelectedTestCaseId$;
+    this._selectedTestCaseId$ = this.uistate.SelectedTestCaseId$.pipe();
   }
 
   selectTest($event: string): void {
+    console.log('Page: ', $event);
     this.uistate.selectTestCase($event);
   }
 }

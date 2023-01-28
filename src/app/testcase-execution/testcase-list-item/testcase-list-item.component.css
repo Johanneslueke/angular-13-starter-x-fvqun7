@@ -1,4 +1,12 @@
 .card {
   max-width: 400px;
   margin: 10px;
+  box-shadow: inset;
+}
+
+.card:active {
+  background-color: gray;
+}
+.card:hover {
+  background-color: lightgray;
 }

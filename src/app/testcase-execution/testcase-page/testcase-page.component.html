@@ -1,3 +1,7 @@
 <div>
-  <app-testcase-list [TestCases]="TestCases$ | async"></app-testcase-list>
+  <app-testcase-list
+    *ngIf="TemplateViewModel$ | async as viewmodel"
+    [TestCases]="viewmodel.cases"
+    (select)="selectTest($event)"
+  ></app-testcase-list>
 </div>

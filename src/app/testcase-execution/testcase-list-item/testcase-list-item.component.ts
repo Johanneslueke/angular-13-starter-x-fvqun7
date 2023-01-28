@@ -13,4 +13,9 @@ export class TestcaseListItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  onClick() {
+    console.log('item', this.testcase.id);
+    this.select.emit(this.testcase.id);
+  }
 }

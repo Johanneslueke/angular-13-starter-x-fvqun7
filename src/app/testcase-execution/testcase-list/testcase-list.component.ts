@@ -18,6 +18,7 @@ export class TestcaseListComponent implements OnInit {
   ngOnInit() {}
 
   selectTest($event: string): void {
+    console.log("List", $event)
     this.select.next($event);
   }
 }
