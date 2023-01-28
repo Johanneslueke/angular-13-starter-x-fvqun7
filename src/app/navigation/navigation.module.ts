@@ -7,7 +7,7 @@ import { TestcaseExecutionModule } from '../testcase-execution/testcase-executio
 
 @NgModule({
   declarations: [NavigationPageComponent],
-  imports: [CommonModule, NavigationRoutingModule],
+  imports: [NavigationRoutingModule, CommonModule, RouterModule],
   exports: [NavigationPageComponent],
 })
 export class NavigationModule {}

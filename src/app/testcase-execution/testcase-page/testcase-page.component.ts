@@ -26,7 +26,6 @@ export class TestcasePageComponent implements OnInit {
   constructor(private data: DataRepoService, private uistate: UIStateService) {}
 
   ngOnInit(): void {
-    alert('test');
     this._testCases$ = this.data.Testcases$;
     this._selectedTestCaseId$ = this.uistate.SelectedTestCaseId$;
   }
