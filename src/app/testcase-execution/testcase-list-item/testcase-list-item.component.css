@@ -10,3 +10,7 @@
 .card:hover {
   background-color: lightgray;
 }
+
+.card::after {
+  background-color: white;
+}
