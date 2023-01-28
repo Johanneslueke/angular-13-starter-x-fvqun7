@@ -11,12 +11,8 @@ export class NavigationPageComponent implements OnInit {
 
   ngOnInit(): void {
     // alert('nav init');
-    this.router.navigate(['/run'], { relativeTo: this.route }).then((test) => {
-      alert(test);
-    });
-  }
-
-  alert(msg: any) {
-    alert(msg);
+    this.router
+      .navigate(['/run'], { relativeTo: this.route })
+      .then((test) => {});
   }
 }

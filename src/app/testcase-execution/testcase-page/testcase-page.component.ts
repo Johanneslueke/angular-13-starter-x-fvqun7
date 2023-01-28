@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {
   combineLatest,
+  combineLatestWith,
+  distinct,
+  debounceTime,
   distinctUntilChanged,
   map,
   Observable,
@@ -25,17 +28,18 @@ export class TestcasePageComponent implements OnInit {
       this._testCases$,
       this.uistate.hasFileBeenUploaded$,
     ]).pipe(
+      //debounceTime(300),
       map(([id, cases, fileuploaded]) => ({ id, cases, fileuploaded })),
+
       distinctUntilChanged((prev, cur) => {
         return (
           prev.fileuploaded === cur.fileuploaded &&
           prev.id === cur.id &&
-          Array.isArray(prev.cases) &&
-          Array.isArray(cur.cases) &&
           prev.cases.length === cur.cases.length &&
           prev.cases.every((val, index) => val === cur.cases[index])
         );
       }),
+
       tap(console.log)
     );
   }

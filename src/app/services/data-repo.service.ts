@@ -15,10 +15,8 @@ export class DataRepoService {
     return this._testcases$.asObservable().pipe(
       distinctUntilChanged((prev, cur) => {
         return (
-          Array.isArray(prev) &&
-          Array.isArray(cur) &&
           prev.length === cur.length &&
-          prev.every((val, index) => val === cur[index])
+          prev.every((val, index) => val.id === cur[index].id)
         );
       })
     );
