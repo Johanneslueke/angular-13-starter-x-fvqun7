@@ -6,6 +6,9 @@
   <li style="float:right">
     <a routerLink="run" routerLinkActive="active">About</a>
   </li>
+  <li>
+    <a> {{ uistate.SelectedTestCaseId$ | async }} </a>
+  </li>
 </ul>
 <section>
   <router-outlet></router-outlet>
