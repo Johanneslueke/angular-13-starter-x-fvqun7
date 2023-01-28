@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { combineLatest, map, Observable, tap } from 'rxjs';
+import {
+  combineLatest,
+  distinctUntilChanged,
+  map,
+  Observable,
+  tap,
+} from 'rxjs';
 import { TestcaseModel } from 'src/app/models/testcase-model';
 import { DataRepoService } from 'src/app/services/data-repo.service';
 import { UIStateService } from 'src/app/services/uistate.service';
@@ -18,7 +24,20 @@ export class TestcasePageComponent implements OnInit {
       this._selectedTestCaseId$,
       this._testCases$,
       this.uistate.hasFileBeenUploaded$,
-    ]).pipe(map(([id, cases, fileuploaded]) => ({ id, cases, fileuploaded })));
+    ]).pipe(
+      map(([id, cases, fileuploaded]) => ({ id, cases, fileuploaded })),
+      distinctUntilChanged((prev, cur) => {
+        return (
+          prev.fileuploaded === cur.fileuploaded &&
+          prev.id === cur.id &&
+          Array.isArray(prev.cases) &&
+          Array.isArray(cur.cases) &&
+          prev.cases.length === cur.cases.length &&
+          prev.cases.every((val, index) => val === cur.cases[index])
+        );
+      }),
+      tap(console.log)
+    );
   }
 
   get TestCases$() {
@@ -27,7 +46,17 @@ export class TestcasePageComponent implements OnInit {
 
   get SelectedTestCase() {
     return this.TemplateViewModel$.pipe(
-      map(({ id, cases }) => cases.find((t) => t.id === id))
+      map(
+        ({
+          id,
+          cases,
+          fileuploaded,
+        }: {
+          id: string;
+          cases: Array<TestcaseModel>;
+          fileuploaded: boolean;
+        }) => cases.find((t) => t.id === id)
+      )
     );
   }
 

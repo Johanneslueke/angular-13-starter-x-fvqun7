@@ -7,10 +7,11 @@ import { CRUDServiceService } from './crudservice.service';
   providedIn: 'root',
 })
 export class BackendAPIService {
+  called = false;
   constructor(private crud: CRUDServiceService) {}
 
   storageFileUploaded(): Observable<boolean> {
-    return of(true);
+    return of(this.called);
     //return this.crud.read<boolean>('api/storage/fileuploaded');
   }
 
@@ -19,6 +20,7 @@ export class BackendAPIService {
   }
 
   testcases() {
+    this.called = true;
     return of([
       {
         id: 'abc',

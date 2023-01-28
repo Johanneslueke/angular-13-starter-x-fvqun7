@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, Subscription } from 'rxjs';
 import { TestcaseModel } from '../models/testcase-model';
 import { BackendAPIService } from './backend-api.service';
 
@@ -12,10 +12,24 @@ export class DataRepoService {
   private _testcases!: Array<TestcaseModel>;
 
   get Testcases$() {
-    return this._testcases$.asObservable();
+    return this._testcases$.asObservable().pipe(
+      distinctUntilChanged((prev, cur) => {
+        return (
+          Array.isArray(prev) &&
+          Array.isArray(cur) &&
+          prev.length === cur.length &&
+          prev.every((val, index) => val === cur[index])
+        );
+      })
+    );
   }
 
   constructor(private api: BackendAPIService) {
+    //this.refresh();
+  }
+
+  refresh() {
+    this._testcasesSub?.unsubscribe();
     this._testcasesSub = this.Testcases$.subscribe(
       (data) => (this._testcases = data)
     );

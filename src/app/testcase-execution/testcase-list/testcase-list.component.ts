@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { combineLatest, map, Observable } from 'rxjs';
 import { TestcaseModel } from 'src/app/models/testcase-model';
 import { DataRepoService } from 'src/app/services/data-repo.service';
@@ -8,6 +15,7 @@ import { UIStateService } from 'src/app/services/uistate.service';
   selector: 'app-testcase-list',
   templateUrl: './testcase-list.component.html',
   styleUrls: ['./testcase-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestcaseListComponent implements OnInit {
   @Input() TestCases!: Array<TestcaseModel> | null;
@@ -18,7 +26,7 @@ export class TestcaseListComponent implements OnInit {
   ngOnInit() {}
 
   selectTest($event: string): void {
-    console.log("List", $event)
+    console.log('List', $event);
     this.select.next($event);
   }
 }

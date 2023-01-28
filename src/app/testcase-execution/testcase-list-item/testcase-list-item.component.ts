@@ -1,10 +1,18 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { TestcaseModel } from 'src/app/models/testcase-model';
 
 @Component({
   selector: 'app-testcase-list-item',
   templateUrl: './testcase-list-item.component.html',
   styleUrls: ['./testcase-list-item.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestcaseListItemComponent implements OnInit {
   @Input() testcase!: TestcaseModel;
