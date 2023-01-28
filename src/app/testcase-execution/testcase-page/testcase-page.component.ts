@@ -14,9 +14,11 @@ export class TestcasePageComponent implements OnInit {
   private _testCases$!: Observable<Array<TestcaseModel>>;
 
   get TemplateViewModel$() {
-    return combineLatest([this._selectedTestCaseId$, this._testCases$]).pipe(
-      map(([id, cases]) => ({ id, cases }))
-    );
+    return combineLatest([
+      this._selectedTestCaseId$,
+      this._testCases$,
+      this.uistate.hasFileBeenUploaded$,
+    ]).pipe(map(([id, cases, fileuploaded]) => ({ id, cases, fileuploaded })));
   }
 
   get TestCases$() {
@@ -29,7 +31,7 @@ export class TestcasePageComponent implements OnInit {
     );
   }
 
-  constructor(private data: DataRepoService, private uistate: UIStateService) {}
+  constructor(private data: DataRepoService, public uistate: UIStateService) {}
 
   ngOnInit(): void {
     this._testCases$ = this.data.Testcases$;

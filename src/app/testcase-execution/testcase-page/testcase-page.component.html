@@ -1,7 +1,11 @@
-<div>
+<div
+  *ngIf="TemplateViewModel$ | async as viewmodel"
+  [ngSwitch]="viewmodel.fileuploaded"
+>
   <app-testcase-list
-    *ngIf="TemplateViewModel$ | async as viewmodel"
+    *ngSwitchCase="true"
     [TestCases]="viewmodel.cases"
     (select)="selectTest($event)"
   ></app-testcase-list>
+  <app-file-upload *ngSwitchCase="false"></app-file-upload>
 </div>

@@ -9,6 +9,11 @@ import { CRUDServiceService } from './crudservice.service';
 export class BackendAPIService {
   constructor(private crud: CRUDServiceService) {}
 
+  storageFileUploaded(): Observable<boolean> {
+    return of(true);
+    //return this.crud.read<boolean>('api/storage/fileuploaded');
+  }
+
   testcaseDataAvailable(): Observable<boolean> {
     return this.crud.read<boolean>('api/testcases/available');
   }

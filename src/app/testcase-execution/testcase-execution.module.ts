@@ -7,11 +7,13 @@ import { TestCaseExcecutionRoutingModule } from './testcase-execution.routing.mo
 
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 @NgModule({
   declarations: [
     TestcasePageComponent,
     TestcaseListComponent,
     TestcaseListItemComponent,
+    FileUploadComponent,
   ],
   imports: [CommonModule, MatCardModule, MatDividerModule],
   exports: [TestcasePageComponent, TestCaseExcecutionRoutingModule],
